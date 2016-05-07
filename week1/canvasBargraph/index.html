@@ -1,0 +1,47 @@
+<!Doctype html>
+<html>
+    <head>
+        
+        <script>
+            var Bargraph=function(idx,clr){
+                
+                this.index=idx;
+                this.color=clr;
+                this.width=20;
+                this.gap=30;
+                this.height=0;
+                this.draw=function(cxt){
+                var start=idx*(this.width+this.gap);
+                cxt.fillStyle=clr;
+                this.baseline=500;
+                cxt.fillRect(start,this.baseline-this.height,this.width,this.baseline);
+                }
+                this.setHeight=function(hgt){
+                  this.height= hgt; 
+                }
+            }
+            window.onload=function(){
+              var cxt=document.getElementById("myCanvas").getContext("2d");
+                var bargraph1=new Bargraph(1,"green");
+                bargraph1.setHeight(100);
+                bargraph1.draw(cxt);
+                var bargraph2=new Bargraph(2,"yellow");
+                bargraph2.setHeight(50);
+                bargraph2.draw(cxt);
+                /*var bargraph3=new Bargraph(3,"green");
+                bargraph3.setHeight(70);
+                bargraph3.draw(cxt);
+                var bargraph4=new Bargraph(4,"blue");
+                bargraph4.setHeight(20);
+                bargraph4.draw(cxt);
+                var bargraph5=new Bargraph(5,"yellow");
+                bargraph5.setHeight(60);
+                bargraph5.draw(cxt);*/
+            }
+        </script>
+       
+    </head>
+    <body>
+        <canvas id="myCanvas" height="800" width="1600"></canvas>
+    </body>
+</html>

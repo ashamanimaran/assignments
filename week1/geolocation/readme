@@ -1,0 +1,42 @@
+Pick your geolocation provider - some are "faster" than others - pick one that makes an api call so that you don't have to maintain your own geolocation database.
+ From the results you'll be able to get a short country code. Then on your script all you have to do is
+
+<img src="/images/banner<?php echo $countryCode; ?>.png">
+Code (markup):and it will automatically go and find the right banner. 
+In my case it would look for bannerNZ
+
+
+https://developers.google.com/maps/signup
+Google Maps JavaScript API
+
+The Google Maps JavaScript API does not require an API key to function correctly. However, we strongly encourage you to load the Maps API using an APIs Console key which allows you to monitor your application's Maps API usage
+
+c:\Users\Asha Manimaran\Documents\visualstudiocode\HTLML5codingPractice\geolocation>typings install modernizr --ambient
+modernizr
+
+<body>
+<script>
+   function initMap() {
+    //you should generate id by using your gmail id and password in
+    //https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple
+   
+    
+    var geocoder=new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(lat,lon);
+    geocoder.geocode({location:latlng}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        var countrycode = results[0].address_components[i].short_name;
+        var countryname = results[0].address_components[i].long_name;
+        console.log(countrycode);
+        console.log(countryname);
+      } else {
+        alert("Geocode was not successful for the following reason: " + status);
+      }
+    });
+    
+ }
+        </script>
+ <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key="your key"&callback=initMap">
+    </script>
+</body>

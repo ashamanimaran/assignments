@@ -1,0 +1,21 @@
+<!Doctype html>
+<html>
+    <head>
+       
+        <script>
+           var incrProgress=function(){
+      
+           if(document.getElementById("myprogress").value<100){
+             document.getElementById("myprogress").value=document.getElementById("myprogress").value+10;  
+           }
+    } 
+          
+        </script>
+       
+    </head>
+    <body>
+      <progress value="0" max="100" id="myprogress"></progress>
+    <input type="button" value="Increment progress" onclick="incrProgress()"/>
+    
+    </body>
+</html>

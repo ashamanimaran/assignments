@@ -1,0 +1,104 @@
+
+<!Doctype html>
+<html>
+    <head>
+ <style>
+     /* label is an inline element it will only take as much width as it needs to no matter how much the width is. you have
+     to make it block or inline-block for the width property to take effect*/
+     /*
+     label{
+    display:inline-block;
+    width: 250px;
+    text-align: right;
+}*/
+     /*
+     setting block alone is not good. even if its width is fixed block will not allow the next element to come to its right.
+     you should float it left to let the next element flow to its side
+     */
+     /*
+label{
+    display:block;
+    float:left;
+    width: 250px;
+    text-align: right;
+} */
+     
+/* An element that is floated is automatically display: block*/
+     
+ label{
+
+    float:left;
+    width: 250px;
+    text-align: right;
+}  
+     /* this positions the div horizontally centered*/
+
+    /* div{
+         width:60%;
+         margin: auto;
+     }*/
+     /*
+     I want to make body have 100% of the browser height. Can I do that using CSS?
+
+      I tried setting height: 100%, but it doesn't work.
+
+      I want to set a background color for a page to fill the entire browser window, but if the page has little content I get a ugly           white bar at the bottom.
+     */
+     
+     /*
+          You can set the margin property to auto to horizontally center the element within its container.
+     The nature of document flow and element height calculation algorythms make it impossible to use margins for centering an element vertically inside its parent. Whenever a vertical margin value is changed, it will trigger a parent element height re-calculation (reflow), which would in turn trigger a re-center of the original element... making it an infinite loop.so to vertically position your form use relative positioning with top 50%
+     
+     using position absolute will vertically center the div but it will take the div out of document flow so, margin:auto to horizonatlly center the div will not work.
+     you CANNOT use MARGIN with ABSOLUTE POSITIONING;
+     */
+     html{
+         height: 100%;
+     }
+      body{
+         height:100%;
+     }
+     div{
+         width:60%;
+         height:400px;
+         margin:auto;
+        position: relative;
+         top:40%;
+         
+     }
+     
+     
+    
+     nav{
+         background-color: black;
+     }
+     li{
+         list-style-type: none;
+         display: inline;
+     }
+     a{
+         color: white;
+     }
+     body{
+         background-color: cadetblue;
+            }
+ </style>
+       
+    </head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Menu Item</a></li>
+            <li><a href="#">Account setting</a></li>
+           <li><a href="#">login</a></li>
+        </ul>
+    </nav>
+<div>
+      <label>Name:</label><input type="text"><br/>
+      <label>Email Address:</label><input type = "text"><br/>
+      <label>Description of the input value:</label><input type="text">
+  </div>
+</body>
+</html>
+

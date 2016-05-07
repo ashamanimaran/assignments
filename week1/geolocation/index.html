@@ -1,0 +1,40 @@
+﻿<!Doctype html>
+<html>
+    <head>
+        <!--Modernizr is a JavaScript library that detects HTML5 and CSS3 features in the user’s browser-->
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+       <script   src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+       <script src="app.js"></script>
+        <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key="your key">
+    </script>
+    </head>
+    <body>
+        <script>
+           
+
+            
+    function initMap() {
+    //you should generate id by using your gmail id and password in
+    //https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple
+   
+    
+    var geocoder=new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(lat,lon);
+    geocoder.geocode({location:latlng}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        var address = results[0].address_components;
+        for(i=0;i<address.length;i++){
+            console.log(address[i].long_name);
+        }
+      } else {
+        alert("Geocode was not successful for the following reason: " + status);
+      }
+    });
+    
+ }
+
+        </script>
+
+    </body>
+</html>
