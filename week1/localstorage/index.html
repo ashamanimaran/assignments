@@ -1,0 +1,56 @@
+<!Doctype html>
+<html>
+    <head>
+        <script>
+        function loadListFromLocalStorage(){
+            document.getElementById("todoList").innerHTML="";
+          var todoStr=window.localStorage.getItem("tempTodo");
+            if(typeof todoStr=="string"){
+          var todoArr=todoStr.split(",");
+          todoArr.forEach(function(item){
+              var li=document.createElement("li");
+              li.appendChild(document.createTextNode(item));
+              document.getElementById("todoList").appendChild(li); 
+          });
+            }
+         
+            
+        }
+        
+        function addToLocalStorage(){
+          var todoStr=window.localStorage.getItem("tempTodo");
+            var todoArr;
+         if(typeof todoStr=="string"){
+            todoArr=todoStr.split(",");  
+         }else{
+             todoArr=[];
+         }
+         
+          todoArr.push(document.getElementById("newTodo").value);
+          todoStr=todoArr.join(",");
+          window.localStorage.setItem("tempTodo",todoStr);
+          loadListFromLocalStorage();
+        }
+        
+        function clearLocalStorage(){
+            window.localStorage.clear();
+            loadListFromLocalStorage();
+        }
+            
+        window.onload=function(){
+        loadListFromLocalStorage();
+            
+        }
+        </script>
+       
+       
+    </head>
+    <body>
+ <h3>Add items to local storage-refresh or close the browser and open again.............</h3><br/>
+<input type="text" id="newTodo"/><input type="button" onclick="addToLocalStorage()"  value="Add to Local storage"/><br/>
+        <ul id="todoList">
+         
+        </ul>
+<input type="button" onclick="clearLocalStorage()"  value="Clear Local storage"/>
+    </body>
+</html>
