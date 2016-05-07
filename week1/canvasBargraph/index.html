@@ -13,8 +13,8 @@
                 this.draw=function(cxt){
                 var start=idx*(this.width+this.gap);
                 cxt.fillStyle=clr;
-                this.baseline=500;
-                cxt.fillRect(start,this.baseline-this.height,this.width,this.baseline);
+                this.baseline=200;
+                cxt.fillRect(start,this.baseline-this.height,this.width,this.height);
                 }
                 this.setHeight=function(hgt){
                   this.height= hgt; 
@@ -28,15 +28,15 @@
                 var bargraph2=new Bargraph(2,"yellow");
                 bargraph2.setHeight(50);
                 bargraph2.draw(cxt);
-                /*var bargraph3=new Bargraph(3,"green");
+                var bargraph3=new Bargraph(3,"green");
                 bargraph3.setHeight(70);
                 bargraph3.draw(cxt);
                 var bargraph4=new Bargraph(4,"blue");
                 bargraph4.setHeight(20);
                 bargraph4.draw(cxt);
-                var bargraph5=new Bargraph(5,"yellow");
+                var bargraph5=new Bargraph(5,"orange");
                 bargraph5.setHeight(60);
-                bargraph5.draw(cxt);*/
+                bargraph5.draw(cxt);
             }
         </script>
        
