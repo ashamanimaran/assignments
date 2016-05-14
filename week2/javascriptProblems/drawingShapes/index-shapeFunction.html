@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #mycanvas {
+            height: 400px;
+            width: 400px;
+            background-color: burlywood;
+        }
+        
+        .show {
+            display: block;
+        }
+        
+        .hide {
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="shapeFunction.js"></script>
+    <script>
+        function selectShape() {
+            var forms = document.getElementsByTagName("form");
+            //forms is a HTMLCollection which is a array like object but does not inherit from array.so you cannot use forms.forEach directly.Instead.....
+            Array.prototype.forEach.call(forms, function (form) {
+                form.classList.remove("show");
+                form.classList.add("hide");
+            });
+            var shape = document.getElementById("selectShape").value;
+            switch (shape) {
+            case "rectangle":
+                document.getElementById("rectangleForm").classList.remove("hide");
+                document.getElementById("rectangleForm").classList.add("show");
+                break;
+            case "circle":
+                document.getElementById("circleForm").classList.remove("hide");
+                document.getElementById("circleForm").classList.add("show");
+                break;
+            case "line":
+                document.getElementById("lineForm").classList.remove("hide");
+                document.getElementById("lineForm").classList.add("show");
+                break;
+
+            default:
+                break;
+            }
+        }
+    </script>
+    <script>
+        window.onload = function () {
+            shapeModuleFunction.clear(400, 400);
+        }
+    </script>
+
+</head>
+
+<body>
+    <canvas id="mycanvas"></canvas>
+    <div>
+        <p><b>Choose Your shape</b></p>
+        <select id="selectShape" onchange="selectShape()">
+            <option value="rectangle selected">rectangle</option>
+            <option value="circle">circle</option>
+            <option value="line">line</option>
+        </select </div>
+
+
+        <div id="shapeForm">
+            <div class="container">
+                <form action="" class="form-inline show" id="rectangleForm" name="rectangleform">
+                    <div class="form-group">
+                        <label for="">X position</label>
+                        <input type="number" class="form-control" name="x" id="" placeholder=0>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Y position</label>
+                        <input type="number" class="form-control" name="y" id="" placeholder=0>
+                        </br>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">width</label>
+                        <input type="number" class="form-control" name="width" id="" placeholder=0>
+                    </div>
+                    <div class="form-group">
+                        <label for="">height</label>
+                        <input type="number" class="form-control" name="height" id="" placeholder=0>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label for="">pick your color</label>
+                        <input type="color" class="form-control" name="colorpicker" value=#aaff00>
+                        <br/>
+                    </div>
+
+                    <button type="button" class="btn btn-info" onclick="shapeModuleFunction.drawRect(document.rectangleform.x.value,document.rectangleform.y.value,document.rectangleform.width.value,document.rectangleform.height.value, document.rectangleform.colorpicker.value)">Draw a rectangle</button>
+                </form>
+                
+                
+                
+                 <form action="" class="form-inline hide" id="circleForm" name="circleform">
+                    <div class="form-group">
+                        <label for="">X position</label>
+                        <input type="number" class="form-control" name="x" id="" placeholder=0>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Y position</label>
+                        <input type="number" class="form-control" name="y" id="" placeholder=0>
+                        </br>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">radius</label>
+                        <input type="number" class="form-control" name="radius" id="" placeholder=0>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="">pick your color</label>
+                        <input type="color" class="form-control" name="colorpicker" value=#aaff00>
+                        <br/>
+                    </div>
+
+                    <button type="button" class="btn btn-info" onclick="shapeModuleFunction.drawCircle(document.circleform.x.value,document.circleform.y.value,document.circleform.radius.value,document.circleform.colorpicker.value)">Draw a circle</button>
+                </form>
+                
+                
+                <form action="" class="form-inline hide" id="lineForm" name="lineform">
+                    <div class="form-group">
+                        <label for="">X1 position</label>
+                        <input type="number" class="form-control" name="x1" id="" placeholder=0>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Y1 position</label>
+                        <input type="number" class="form-control" name="y1" id="" placeholder=0>
+                        </br>
+                    </div>
+
+                     <div class="form-group">
+                        <label for="">X2 position</label>
+                        <input type="number" class="form-control" name="x2" id="" placeholder=0>
+                        <br/>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="">Y2 position</label>
+                        <input type="number" class="form-control" name="y2" id="" placeholder=0>
+                        </br>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="">pick your color</label>
+                        <input type="color" class="form-control" name="colorpicker" value=#aaff00>
+                        <br/>
+                    </div>
+
+                    <button type="button" class="btn btn-info" onclick="shapeModuleFunction.drawLine(document.lineform.x1.value,document.lineform.y1.value,document.lineform.x2.value,document.lineform.y2.value,document.lineform.colorpicker.value)">Draw a line</button>
+                </form>
+
+            </div>
+        </div>
+
+</body>
+
+</html>
