@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script>
+        function postJson() {
+            var jsonstring = document.jsonform.jsontext.value;
+            var jsondata = JSON.parse(jsonstring);
+            $.post("students/addStudent", {
+                data: jsondata
+                , dataType: "application/json"
+            }).then(function success(result) {
+                $("#result").text(JSON.stringify(result));
+            }, function error(err) {
+                $("#result").text(result.message);
+            });
+            return false;
+        }
+    </script>
+    <style>
+        #responseFrame {
+            width: 100%;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <script>
+        function deleteStudent(studentid) {
+            $.ajax({
+                url: "/students/deleteStudent/" + studentid
+                , type: 'DELETE'
+                , success: function success(result) {
+                    alert("deleted!");
+                }
+                , error: function error(err) {
+                    alert("could not delete!");
+                }
+            });
+        }
+    </script>
+        <nav class="navbar navbar-default" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Student Database Manager</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="addStudentForm">Add new student</a></li>
+                    <li><a href="showAllStudentsForm">Show all students</a></li>
+                </ul>
+                <form class="navbar-form navbar-left" name="deleteform">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="studentid" placeholder="enter student id">
+                    </div>
+                    <button type="submit" class="btn btn-default" onclick="deleteStudent(document.deleteform.studentid.value)"> Delete</button>
+                </form>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <form action="students/addStudent" method="POST" class="form-horizontal" role="form" target="responseFrame">
+            <div class="form-group">
+                <legend>Add a new student</legend>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <label for="">First Name:</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="firstname" placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <label for="">Last Name:</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="lastname" placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <label for="">ID:</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="id" placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <label for="">Date of birth:</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="date" class="form-control" name="dob">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <label for="">Course:</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="course" placeholder="course enrolled">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-3 col-sm-offset-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <iframe name="responseFrame" id="responseFrame"></iframe>
+    <form action="students/addStudent" method="POST" name="jsonform" onsubmit="return postJson();">
+        <legend>post json data directly</legend>
+
+        <div class="form-group">
+            <label for="">Add json data for student object</label>
+            <textarea id="input" class="form-control" rows="3" required="required" name="jsontext"> {"firstname":"","lastname":"","id":"","dob":"1990-01-01","course":""}
+            </textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <div class="alert alert-info">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
+        </button>
+        <strong>Result</strong>
+        <p id="result"></p>
+    </div>
+
+    <!--    Posting XML or Json from form without javascript or browser plugins is impossible. The two possible formats of posting html forms are application/x-www-form-urlencoded and multipart/form-data
+    $("#myform").submit(function(){
+  var formjson = $('#myform').serializeArray();
+  var formxml = json2xml(formjson);
+  $.post("/collect.php", { 'data': formxml }, function(data){ 
+    // callback logic
+  });
+  return false;
+});-->
+
+
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</body>
+
+</html>

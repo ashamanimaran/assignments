@@ -1,0 +1,16 @@
+{
+  "name": "studentrestservice",
+  "version": "1.0.0",
+  "description": "4.studentsRESTservice\r Question:Using the REST API at 'localhost:3000/students' create a web application for managing students 1.The REST API provides methods as follows: i. POST creates a new student ii. GET returns all students iii. DELETE deletes a student by Id 2.You may extend the demo for jQuery.ajax()",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.17"
+  }
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+    <script>
+        var jsonObjects;
+        $(document).ready(function () {
+            $.get("/students").then(function success(result) {
+                jsonObjects = result;
+                var jsonStrings = [];
+                $(jsonObjects).each(function (index, item) {
+                    jsonStrings.push(JSON.stringify(item));
+                })
+                $("#result").text(jsonStrings);
+            }, function error(result) {
+                $("#result").text(result.message);
+            });
+        });
+    </script>
+
+    <script id="studentTemplate" type="text/x-jQuery-tmpl">
+   
+       
+            <tr><td>${firstname}</td><td>${lastname}</td><td>${id}</td><td>${dob}</td><td>${course}</td></tr>
+     
+    </script>
+    <script>
+        function showTable() {
+            $("#table").html("");
+            $("#studentTemplate").tmpl(jsonObjects).appendTo("#table");
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+    <script>
+        function deleteStudent(studentid) {
+            $.ajax({
+                url: "/students/deleteStudent/" + studentid
+                , type: 'DELETE'
+                , success: function success(result) {
+                    alert("deleted!");
+                }
+                , error: function error(err) {
+                    alert("could not delete!");
+                }
+            });
+        }
+    </script>
+        <nav class="navbar navbar-default" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Student Database Manager</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="addStudentForm">Add new student</a></li>
+                    <li><a href="showAllStudentsForm">Show all students</a></li>
+                </ul>
+                <form class="navbar-form navbar-left" name="deleteform">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="studentid" placeholder="enter student id">
+                    </div>
+                    <button type="submit" class="btn btn-default" onclick="deleteStudent(document.deleteform.studentid.value)"> Delete</button>
+                </form>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <h3>Here is a list of all students!</h3>
+        <div class="alert alert-info">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
+            </button>
+            <strong>Result</strong>
+            <p id="result"></p>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="showTable()">Show in table format</button>
+
+
+    </div>
+    <table class="table">
+    <thead>
+            <tr><th>First Name</th><th>Last Name</th><th>ID</th><th>Date of birth</th><th>course</th></tr>
+             
+  </thead>
+   <tbody id="table"></tbody>
+    </table>
+
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</body>
+
+</html>
